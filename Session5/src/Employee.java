@@ -1,12 +1,18 @@
+import java.util.Scanner;
 
 public class Employee {
 
 	private int empId;
 	private String name;
 	private String address;
-	private int salary;
+	private double salary;
 
-	public Employee(int empId, String name, String address, int salary) {
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employee(int empId, String name, String address, double salary) {
 		super();
 		this.empId = empId;
 		this.name = name;
@@ -43,12 +49,24 @@ public class Employee {
 		this.address = address;
 	}
 
-	public int getSalary() {
+	public double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(int salary) {
+	public void setSalary(double salary) {
 		this.salary = salary;
+	}
+
+	public void accept(Scanner sc) {
+		System.out.println("Enter employee ID:");
+		empId = sc.nextInt();
+		System.out.println("Enter name:");
+		name = sc.next();
+		System.out.println("Enter address:");
+		address = sc.next();
+		System.out.println("Enter salary:");
+		salary = sc.nextInt();
+
 	}
 
 	void print() {

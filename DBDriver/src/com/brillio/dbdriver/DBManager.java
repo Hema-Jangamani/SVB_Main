@@ -9,23 +9,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Scanner;
 
 public class DBManager {
 
 	String dbname;
+	String user;
+	String password;
 	Connection con;
 	Statement stmt;
 
-	public DBManager(String dbname) {
+	public DBManager(String dbname, String user, String password) {
+
+		this.dbname = dbname;
+		this.user = user;
+		this.password = password;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+this.dbname, "root", "root");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.dbname, "root", "root");
 			stmt = con.createStatement();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -35,71 +37,60 @@ public class DBManager {
 
 	}
 
-	public List<String> getAll(String tableName) throws SQLException {
-		String query = "select * from " + tableName;
-		ResultSet rs = stmt.executeQuery(query);
-		List<String> list = new ArrayList<>();
+	public ArrayList<String> getAll(String tableName) throws SQLException, ClassNotFoundException {
 
+		System.out.println("Connection established ...");
+
+		stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery("select * from " + tableName);
+		ArrayList<String> list = new ArrayList<String>();
 		while (rs.next()) {
+
 			ResultSetMetaData rsm = rs.getMetaData();
 			int count = rsm.getColumnCount();
 			String str = "";
 			for (int i = 1; i <= count; i++) {
-				str = str + " " + rs.getString(i);
+				str = str + "           " + rs.getString(i);
 			}
-//			String resultSet = rs.getInt(1)+rs.getString(2)+rs.getString(3)+rs.getString(4);
 			list.add(str);
 		}
-
+//		System.out.println(list);
+		rs.close();
+		stmt.close();
 		return list;
+
 	}
 
 	public void insert(String tableName, HashMap<String, String> data) throws SQLException {
 
-//		Iterator iterator = data.entrySet().iterator();
-//		while (iterator.hasNext()) {
-//			Map.Entry mapElement = (Map.Entry) iterator.next();
-//			String key = (String) mapElement.getKey();
-//			Object value = mapElement.getValue();
-//			// insert into tablename(key) values(value);
-//			String query = "insert into " + tableName + " (" + key + ",) "+"values (" + value + ",)";
-//			stmt.executeUpdate(query);
-		
 		System.out.println("Inserting records ...");
-	        String columnkey ="";
-	        String columnvalues ="";
-	        Statement stmt = con.createStatement();
-	        
-	        for(HashMap.Entry<String,String> elements : data.entrySet()) {
-	            
-	            String keys = elements.getKey();
-	            columnkey = columnkey + keys + ",";
-	            
-	            String values = elements.getValue();
-	            
-	            if(values.charAt(0)>48 && values.charAt(0)<57)
-	            columnvalues = columnvalues + values+",";
-	            else
-	                columnvalues = columnvalues +"'"+values+"',";
-	        }
-	        columnkey = columnkey.substring(0, columnkey.length()-1);
-	        System.out.println(columnkey);
-//	        for(HashMap.Entry<String,String> elements : m.entrySet()) {
-//	        
-//	            String values = elements.getValue();
-//	            columnvalues = columnvalues + values+",";
-//	            
-//	        }
-	        columnvalues = columnvalues.substring(0, columnvalues.length()-1);
-	        System.out.println(columnvalues);
-	        
-	        String query = "INSERT INTO "+tableName +"("+columnkey+")"+" VALUES ("+columnvalues+")";
-	        System.out.println(query);
-	        PreparedStatement pr=con.prepareStatement(query);
-	        pr.executeUpdate();
-	        pr.close();
-	        
-	    }
+		String columnkey = "";
+		String columnvalues = "";
+		stmt = con.createStatement();
+
+		for (HashMap.Entry<String, String> elements : data.entrySet()) {
+
+			String keys = elements.getKey();
+			columnkey = columnkey + keys + ",";
+
+			String values = elements.getValue();
+
+			if (values.charAt(0) >= 48 && values.charAt(0) <= 57)
+				columnvalues = columnvalues + values + ",";
+			else
+				columnvalues = columnvalues + "'" + values + "',";
+		}
+		columnkey = columnkey.substring(0, columnkey.length() - 1);
+		System.out.println(columnkey);
+
+		columnvalues = columnvalues.substring(0, columnvalues.length() - 1);
+		System.out.println(columnvalues);
+
+		String query = "INSERT INTO " + tableName + "(" + columnkey + ")" + " VALUES (" + columnvalues + ")";
+		System.out.println(query);
+		stmt.executeUpdate(query);
+		stmt.close();
+
+	}
 
 }
-

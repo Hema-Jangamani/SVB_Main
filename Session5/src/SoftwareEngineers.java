@@ -1,11 +1,17 @@
+import java.util.Scanner;
 
 public class SoftwareEngineers extends Employee {
 
 	private String skillset;
-	private String customers;
+	private int customers;
 	private int experience;
 
-	public SoftwareEngineers(int empId, String name, String address, int salary, String skillset, String customers,
+	public SoftwareEngineers() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public SoftwareEngineers(int empId, String name, String address, double salary, String skillset, int customers,
 			int experience) {
 		super(empId, name, address, salary);
 		this.skillset = skillset;
@@ -21,11 +27,11 @@ public class SoftwareEngineers extends Employee {
 		this.skillset = skillset;
 	}
 
-	public String getCustomers() {
+	public int getCustomers() {
 		return customers;
 	}
 
-	public void setCustomers(String customers) {
+	public void setCustomers(int customers) {
 		this.customers = customers;
 	}
 
@@ -35,6 +41,17 @@ public class SoftwareEngineers extends Employee {
 
 	public void setExpirience(int experience) {
 		this.experience = experience;
+	}
+
+	public void accept(Scanner sc) {
+		super.accept(sc);
+		System.out.println("Enter skillset:");
+		skillset = sc.next();
+		System.out.println("Enter customers:");
+		customers = sc.nextInt();
+		System.out.println("Enter experience:");
+		experience = sc.nextInt();
+
 	}
 
 	@Override

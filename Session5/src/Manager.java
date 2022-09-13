@@ -1,40 +1,57 @@
+import java.util.Scanner;
 
 public class Manager extends SoftwareEngineers {
 
-	private String teams;
-	private int Bonus;
-	private int budget;
+	private int teams;
+	private double Bonus;
+	private double budget;
 
-	public Manager(int empId, String name, String address, int salary, String skillset, String customers,
-			int experience, String teams, int bonus, int budget) {
+	public Manager() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Manager(int empId, String name, String address, double salary, String skillset, int customers,
+			int experience, int teams, double bonus, double budget) {
 		super(empId, name, address, salary, skillset, customers, experience);
 		this.teams = teams;
 		Bonus = bonus;
 		this.budget = budget;
 	}
 
-	public String getTeams() {
+	public int getTeams() {
 		return teams;
 	}
 
-	public void setTeams(String teams) {
+	public void setTeams(int teams) {
 		this.teams = teams;
 	}
 
-	public int getBonus() {
+	public double getBonus() {
 		return Bonus;
 	}
 
-	public void setBonus(int bonus) {
+	public void setBonus(double bonus) {
 		Bonus = bonus;
 	}
 
-	public int getBudget() {
+	public double getBudget() {
 		return budget;
 	}
 
-	public void setBudget(int budget) {
+	public void setBudget(double budget) {
 		this.budget = budget;
+	}
+
+	public void accept(Scanner sc) {
+		super.accept(sc);
+		System.out.println("Enter teams:");
+		teams = sc.nextInt();
+		System.out.println("Enter bonus:");
+		Bonus = sc.nextInt();
+		System.out.println("Enter budget:");
+		budget = sc.nextInt();
+
 	}
 
 	@Override

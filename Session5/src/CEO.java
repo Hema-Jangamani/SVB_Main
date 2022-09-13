@@ -1,21 +1,27 @@
+import java.util.Scanner;
 
 public class CEO extends Manager {
 
-	private int Bonus;
+	private double Bonus;
 	private int noOfManagersReporting;
 
-	public CEO(int empId, String name, String address, int salary, String skillset, String customers, int experience,
-			String teams, int bonus, int budget, int bonus2, int noOfManagersReporting) {
+	public CEO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CEO(int empId, String name, String address, double salary, String skillset, int customers, int experience,
+			int teams, double bonus, double budget, double bonus2, int noOfManagersReporting) {
 		super(empId, name, address, salary, skillset, customers, experience, teams, bonus, budget);
 		Bonus = bonus2;
 		this.noOfManagersReporting = noOfManagersReporting;
 	}
 
-	public int getBonus() {
+	public double getBonus() {
 		return Bonus;
 	}
 
-	public void setBonus(int bonus) {
+	public void setBonus(double bonus) {
 		Bonus = bonus;
 	}
 
@@ -25,6 +31,15 @@ public class CEO extends Manager {
 
 	public void setNoOfManagersReporting(int noOfManagersReporting) {
 		this.noOfManagersReporting = noOfManagersReporting;
+	}
+
+	public void accept(Scanner sc) {
+		super.accept(sc);
+		System.out.println("Enter bonus:");
+		Bonus = sc.nextInt();
+		System.out.println("Enter no of reporting managers:");
+		noOfManagersReporting = sc.nextInt();
+
 	}
 
 	@Override
