@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,5 +37,13 @@ public class ClientFacingEndPoint {
 	@RequestMapping("getListValues")
 	public List abc() {
 		return listValues;
+	}
+	
+	@Autowired
+	private Environment env;
+	
+	@GetMapping("/envDetails")  // to get all details
+	public String envDetails() {
+		return env.toString();
 	}
 }

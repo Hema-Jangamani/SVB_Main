@@ -30,8 +30,8 @@ public class DBMain {
 
 		
 		 HashMap<String,String> map= new HashMap<String,String>();
-	        map.put("idEmployee", "5");
-	        map.put("FirstName", "Shiv");
+	        map.put("idEmployee", "6");
+	        map.put("FirstName", "Dev");
 	        map.put("LastName", "K");
 	        map.put("Salary", "20000");
 	        DBObject.insert("employee",map);
