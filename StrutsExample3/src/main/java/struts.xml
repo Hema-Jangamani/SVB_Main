@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="helloworld" namespace="/hello"
+		extends="struts-default">
+		<action name="hello"
+			class="com.struts.example3.HelloWorldAction" method="execute">
+			<result name="success">/HelloWorld.jsp</result>
+			<result name="failure">/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="default">
+		<action name="foo" class="com.struts.example3.HelloWorldAction">
+			<result name="success" type="dispatcher">greeting.jsp</result>
+		</action>
+		<action name="bar" class="com.struts.example3.HelloWorldAction">
+			<result name="success" type="dispatcher">bar1.jsp</result>
+		</action>
+	</package>
+
+	<package name="bangalore" namespace="/">
+		<action name="moo" class="com.struts.example3.HelloWorldAction">
+			<result name="success" type="dispatcher">moo.jsp</result>
+		</action>
+	</package>
+
+	<package name="gulbarga" namespace="/">
+		<action name="bar" class="com.struts.example3.HelloWorldAction">
+			<result name="success" type="dispatcher">bar2.jsp</result>
+		</action>
+	</package>
+
+</struts>
