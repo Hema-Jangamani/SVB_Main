@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="business" extends="struts-default">
+		 <action name="find*" class="GetBusinessAction"
+			method="{1}">
+			<result name="success">/find{1}.jsp</result>
+		</action>
+		
+		<action name="login"
+			class="LoginAction" method="execute">
+			<result name="success">/index.jsp</result>
+			<result name="failure">/Error.jsp</result>
+		</action>
+		
+		<!--  <action name="findrestaurents" class="GetBusinessAction"
+			method="restaurents">
+			<result name="success">/findrestaurents.jsp</result>
+		</action>
+		
+		<action name="findhospitals" class="GetBusinessAction"
+			method="hospitals">
+			<result name="success">/findhospitals.jsp</result>
+		</action>
+		
+		<action name="findmovieTheaters" class="GetBusinessAction"
+			method="movieTheaters">
+			<result name="success">/findmovieTheaters.jsp</result>
+		</action>-->
+
+	</package>
+
+</struts>
