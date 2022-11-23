@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+
+	<form-beans>
+		<form-bean name="EMP" type="com.formbeans.Employee" />
+		<form-bean name="LOGIN" type="com.formbeans.LoginForm" />
+		<form-bean name="FORGOT" type="com.formbeans.ForgotPassword" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/reg" name="EMP" validate="true"
+			input="/index.jsp" type="com.controller.RegistrationAction">
+			<forward name="success" path="/login.jsp" />
+		</action>
+		<action path="/login" name="LOGIN" validate="true"
+			input="/login.jsp" type="com.controller.LoginAction" parameter="submit">
+			<forward name="success" path="/success.jsp" />
+			<forward name="failure" path="/error.jsp" />
+			<forward name="forgot" path="/forgotPassword.jsp" />
+			<forward name="register" path="/index.jsp" />
+		</action>
+		
+		<action path="/forgot" name="FORGOT" validate="true"
+			 input="/forgotPassword.jsp" type="com.controller.ForgotPasswordAction" parameter="submit">
+			<forward name="success" path="/login.jsp" />
+		</action>
+	</action-mappings>
+	
+	<message-resources parameter="com.resources/Messages" />
+
+</struts-config>
